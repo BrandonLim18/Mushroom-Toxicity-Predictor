@@ -38,27 +38,19 @@ To run this application on your local machine, follow these steps:
     cd Botanical-Toxicity-Predictor
     ```
 
-2.  **Set Up a Virtual Environment (Recommended):**
-    ```bash
-    python -m venv venv
-    # On Windows:
-    venv\Scripts\activate
-    # On macOS/Linux:
-    source venv/bin/activate
-    ```
 
-3.  **Install Dependencies:**
+2.  **Install Dependencies:**
     *(Note: Ensure you have `flask`, `pandas`, and `scikit-learn` installed)*
     ```bash
     pip install flask pandas scikit-learn
     ```
 
-4.  **Start the Server:**
+3.  **Start the Server:**
     ```bash
     python app.py
     ```
 
-5.  **Open the Application:**
+4.  **Open the Application:**
     Navigate to `http://127.0.0.1:5000` in your web browser.
 
 ## 🗂️ Project Structure
