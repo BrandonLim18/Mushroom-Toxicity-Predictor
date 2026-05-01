@@ -2,7 +2,6 @@
 
 A comprehensive, deep-learning powered web application designed to act as a digital field journal and toxicity screening tool for botanical specimens (mushrooms).
 
-![Project Banner](https://images.unsplash.com/photo-1542385151-efd9000785a0?q=80&w=2000&auto=format&fit=crop) *(Placeholder banner - replace with an actual screenshot of the app)*
 
 ## 📖 Overview
 
