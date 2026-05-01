@@ -67,6 +67,7 @@
                     <h3 class="fw-bold mb-3">Field Result: {{ prediction }}</h3>
                     <!-- NEW: Classify Another Mushroom Button -->
                     <a href="/" class="btn btn-light fw-bold px-4 py-2 text-dark shadow-sm">↺ Classify Another Mushroom</a>
+                    <button type="button" class="btn btn-outline-light fw-bold px-4 py-2 shadow-sm" onclick="downloadLog()">📥 Download Official Log</button>
                 </div>
                 {% endif %}
 
@@ -263,7 +264,7 @@
         }
     });
 </script>
-<!-- ADD THIS AT THE VERY BOTTOM, RIGHT BEFORE </body> -->
+
 {% if prediction %}
 <script>
     // This runs immediately after the page reloads from a prediction
@@ -276,6 +277,33 @@
             document.getElementById('botanist_note').scrollIntoView({behavior: "smooth", block: "center"});
         }, 100);
     });
+
+    function downloadLog() {
+        // 1. Grab the text from the botanist note box
+        let noteText = document.getElementById('botanist_note').value;
+        
+        // 2. Make sure it isn't empty
+        if (!noteText || noteText.trim() === "") {
+            alert("There is no log to download yet!");
+            return;
+        }
+
+        // 3. Create a digital text file (Blob) in the browser
+        let blob = new window.Blob([noteText], { type: 'text/plain' });
+        
+        // 4. Create a temporary download link
+        let a = document.createElement('a');
+        a.href = window.URL.createObjectURL(blob);
+        
+        // 5. Name the file with today's date!
+        let date = new Date().toISOString().split('T')[0];
+        a.download = `Botanical_Observation_${date}.txt`;
+        
+        // 6. Trigger the download automatically
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
 </script>
 {% endif %}
 </body>
