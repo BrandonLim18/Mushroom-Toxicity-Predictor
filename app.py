@@ -4,11 +4,9 @@ import pickle
 
 app = Flask(__name__)
 
-# Load the Master Model
-with open('decision_tree_master.pkl', 'rb') as file:
-    model_data = pickle.load(file)
-    model = model_data['model']
-    training_columns = model_data['columns']
+# Load the Master Model Pipeline directly
+with open('decision_tree_master (2).pkl', 'rb') as file:
+    model = pickle.load(file)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -34,14 +32,12 @@ def index():
         input_data = pd.DataFrame(input_dict)
         botanist_note = request.form.get('botanist_note')
 
-        # Encode and Predict
-        input_encoded = pd.get_dummies(input_data)
-        input_encoded = input_encoded.reindex(columns=training_columns, fill_value=0)
-        pred = model.predict(input_encoded)[0]
+        # -------------------------------------------------------------
+        # THE PIPELINE 
+        pred = model.predict(input_data)[0]
+        # -------------------------------------------------------------
         
-        # -------------------------------------------------------------
         # STEP 3: THE OFFICIAL DIAGNOSTIC STAMP
-        # -------------------------------------------------------------
         if pred == 1:
             prediction_result = "⚠️ TOXIC / POISONOUS"
             verdict_stamp = "\n\n====================================================\n[ OFFICIAL DIAGNOSIS ]: ⚠️ LETHAL TOXICITY CONFIRMED\nDo NOT eat. Specimen contains severe toxicological markers.\nHandle with extreme caution and wash hands immediately."
